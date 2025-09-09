@@ -1,0 +1,10 @@
+.containerTags{
+    display: flex;
+    align-items: center;
+}
+
+
+.tagIcon::before{
+    content: url('../../../../public/ubicacion.png');
+    
+}
