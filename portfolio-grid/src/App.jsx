@@ -1,12 +1,10 @@
-import './App.css'
-import Tags from './components/01-Atomos/tags/Tags'
+import './App.scss'
+
 function App() {
  
   return (
     <>
-        <div className="container">
-     <Tags descripcion={"India 2"} />
-    </div>
+<h1 className='my-element' >hola</h1>
     </>
   )
 }

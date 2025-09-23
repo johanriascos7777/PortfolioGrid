@@ -1,8 +1,0 @@
-$primary-color: #4f46e5; // Un morado bonito
-
-.container {
-  background-color: $primary-color;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-}

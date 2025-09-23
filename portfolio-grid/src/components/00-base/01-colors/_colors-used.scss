@@ -1,0 +1,18 @@
+// src/components/00-base/01-colors/colors-used.scss
+
+@use './colors-vars' as cv;
+
+$colors: (
+  'text':           cv.$white,
+  'text-inverse':   cv.$white,
+  'background':     cv.$black,
+  'primary':        cv.$blue-01,
+  'secondary':      cv.$purple-01,
+  'link':           cv.$blue-01,
+  'heading':        cv.$white,
+  'border':         cv.$gray-light, 
+  'success':        cv.$success-01,
+  'error':          cv.$error-01,
+  'warning':        cv.$warning-01
+);
+
