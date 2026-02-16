@@ -1,0 +1,56 @@
+// src/components/00-base/00-defaults/_02-breakpoints.scss
+
+/**
+ * Breakpoint Configuration
+ * @see https://github.com/Team-Sass/breakpoint/wiki
+ */
+
+// Global Breakpoints
+$xs: 320px;
+$small: 425px;
+$medium: 768px;
+$large: 1280px;
+$xl: 1616px;
+$max-width: $xl;
+
+/// Mixin - xs Breakpoint
+@mixin xs {
+  @media (min-width: $xs) {
+    @content;
+  }
+}
+
+/// Mixin - small Breakpoint
+@mixin small {
+  @media (min-width: $small) {
+    @content;
+  }
+}
+
+/// Mixin - medium Breakpoint
+@mixin medium {
+  @media (min-width: $medium) {
+    @content;
+  }
+}
+
+/// Mixin - large Breakpoint
+@mixin large {
+  @media (min-width: $large) {
+    @content;
+  }
+}
+
+/// Mixin - xl Breakpoint
+@mixin xl {
+  @media (min-width: $xl) {
+    @content;
+  }
+}
+
+/// Mixin - max-width Breakpoint
+@mixin max-width {
+  @media (min-width: $max-width) {
+    @content;
+  }
+}

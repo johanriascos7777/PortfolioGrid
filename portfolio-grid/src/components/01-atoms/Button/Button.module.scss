@@ -1,0 +1,339 @@
+// src/components/01-atoms/Button/Button.module.scss
+
+@use "sass:color";
+@use "../../00-base/00-defaults/01-variables" as vars;
+@use "../../00-base/00-defaults/02-breakpoints" as bp;
+@use "../../00-base/01-colors/colors-used" as colors;
+
+// ============================================
+// MIXINS DE COLORES
+// ============================================
+
+@mixin primary-colors($theme) {
+  @if $theme == light {
+    color: colors.clr("text");
+    background-color: colors.clr("primary");
+    border: 1px solid transparent;
+
+    &:hover {
+      background-color: color.adjust(colors.clr("primary"), $lightness: -10%);
+    }
+    &:focus {
+      outline: none;
+      border: 2px solid color.adjust(colors.clr("primary"), $lightness: -15%);
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  } @else {
+    color: colors.clr("text");
+    background-color: color.adjust(colors.clr("primary"), $lightness: 10%);
+    border: 1px solid transparent;
+
+    &:hover {
+      background-color: colors.clr("primary");
+    }
+    &:focus {
+      outline: none;
+      border: 2px solid colors.clr("text");
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+@mixin secondary-colors($theme) {
+  @if $theme == light {
+    color: colors.clr("primary");
+    background-color: transparent;
+    border: 1px solid colors.clr("primary");
+
+    &:hover {
+      background-color: color.adjust(
+        colors.clr("primary"),
+        $lightness: 40%,
+        $alpha: -0.9
+      );
+    }
+    &:focus {
+      outline: none;
+      border: 2px solid colors.clr("primary");
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  } @else {
+    color: colors.clr("text");
+    background-color: transparent;
+    border: 1px solid colors.clr("text");
+
+    &:hover {
+      background-color: color.adjust(colors.clr("text"), $alpha: -0.9);
+    }
+    &:focus {
+      outline: none;
+      border: 2px solid colors.clr("text");
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+@mixin tertiary-colors($theme) {
+  @if $theme == light {
+    color: colors.clr("primary");
+    background-color: transparent;
+    border: 0.5px solid transparent;
+
+    &:hover {
+      background-color: color.adjust(
+        colors.clr("primary"),
+        $lightness: 40%,
+        $alpha: -0.9
+      );
+    }
+    &:focus {
+      outline: none;
+      border: 0.5px solid colors.clr("primary");
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  } @else {
+    color: colors.clr("text");
+    background-color: transparent;
+    border: 0.5px solid transparent;
+
+    &:hover {
+      background-color: color.adjust(colors.clr("text"), $alpha: -0.9);
+    }
+    &:focus {
+      outline: none;
+      border: 0.5px solid colors.clr("text");
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ============================================
+// BASE COMÚN
+// ============================================
+
+%btnBase {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(vars.$space * 1);
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  width: fit-content;
+}
+
+%sizeLarge {
+  min-width: 20.5rem;
+  max-width: 100%;
+  min-height: 3.25rem;
+  padding: calc(vars.$space * 1) calc(vars.$space * 1.5);
+
+  @include bp.medium {
+    min-width: 11rem;
+  }
+}
+
+%sizeMedium {
+  min-width: 20.5rem;
+  max-width: 100%;
+  min-height: 3rem;
+  padding: calc(vars.$space * 1) calc(vars.$space * 1.5);
+
+  @include bp.medium {
+    min-width: 11rem;
+    min-height: 2.75rem;
+    padding: calc(vars.$space * 0.75) calc(vars.$space * 1.25);
+  }
+}
+
+%sizeSmall {
+  min-width: 6.1875rem;
+  max-width: 100%;
+  min-height: 3rem;
+  padding: calc(vars.$space * 1) calc(vars.$space * 1.5);
+
+  @include bp.medium {
+    min-height: 2.5rem;
+    padding: calc(vars.$space * 0.75) calc(vars.$space * 1.25);
+  }
+}
+
+// ============================================
+// 9 CLASES BASE (3 variantes × 3 tamaños)
+// ============================================
+
+// 🔴 CAMBIO: Agregué &.dark a cada clase base
+
+.btnPrimaryLarge {
+  @extend %btnBase, %sizeLarge;
+  @include primary-colors(light);
+  :global(.theme-dark) & {
+    @include primary-colors(dark);
+  }
+  // 🟢 NUEVO: Soporte para prop dark
+  &.dark {
+    @include primary-colors(dark);
+  }
+}
+
+.btnPrimaryMedium {
+  @extend %btnBase, %sizeMedium;
+  @include primary-colors(light);
+  :global(.theme-dark) & {
+    @include primary-colors(dark);
+  }
+  // 🟢 NUEVO
+  &.dark {
+    @include primary-colors(dark);
+  }
+}
+
+.btnPrimarySmall {
+  @extend %btnBase, %sizeSmall;
+  @include primary-colors(light);
+  :global(.theme-dark) & {
+    @include primary-colors(dark);
+  }
+  // 🟢 NUEVO
+  &.dark {
+    @include primary-colors(dark);
+  }
+}
+
+.btnSecondaryLarge {
+  @extend %btnBase, %sizeLarge;
+  @include secondary-colors(light);
+  :global(.theme-dark) & {
+    @include secondary-colors(dark);
+  }
+  // 🟢 NUEVO
+  &.dark {
+    @include secondary-colors(dark);
+  }
+}
+
+.btnSecondaryMedium {
+  @extend %btnBase, %sizeMedium;
+  @include secondary-colors(light);
+  :global(.theme-dark) & {
+    @include secondary-colors(dark);
+  }
+  // 🟢 NUEVO
+  &.dark {
+    @include secondary-colors(dark);
+  }
+}
+
+.btnSecondarySmall {
+  @extend %btnBase, %sizeSmall;
+  @include secondary-colors(light);
+  :global(.theme-dark) & {
+    @include secondary-colors(dark);
+  }
+  // 🟢 NUEVO
+  &.dark {
+    @include secondary-colors(dark);
+  }
+}
+
+.btnTertiaryLarge {
+  @extend %btnBase, %sizeLarge;
+  @include tertiary-colors(light);
+  :global(.theme-dark) & {
+    @include tertiary-colors(dark);
+  }
+  // 🟢 NUEVO
+  &.dark {
+    @include tertiary-colors(dark);
+  }
+}
+
+.btnTertiaryMedium {
+  @extend %btnBase, %sizeMedium;
+  @include tertiary-colors(light);
+  :global(.theme-dark) & {
+    @include tertiary-colors(dark);
+  }
+  // 🟢 NUEVO
+  &.dark {
+    @include tertiary-colors(dark);
+  }
+}
+
+.btnTertiarySmall {
+  @extend %btnBase, %sizeSmall;
+  @include tertiary-colors(light);
+  :global(.theme-dark) & {
+    @include tertiary-colors(dark);
+  }
+  // 🟢 NUEVO
+  &.dark {
+    @include tertiary-colors(dark);
+  }
+}
+
+// ============================================
+// MODIFICADORES
+// ============================================
+
+// 🟢 NUEVO: Clase dark vacía para exportar en CSS Modules
+.dark {}
+
+// 🟢 NUEVO: Clases de iconos para exportar
+.iconRight {
+  justify-content: space-between;
+}
+
+.iconLeft {
+  justify-content: space-between;
+}
+
+// 🟢 NUEVO: Clase full para exportar
+.full {
+  width: 100%;
+}
+
+// ============================================
+// UTILIDADES
+// ============================================
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+// 🔴 CAMBIO: Nombres actualizados para coincidir con Button.jsx
+.ss3ButtonLarge600 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.ss3ButtonMedium600 {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.ss3ButtonSmall600 {
+  font-size: 0.75rem;
+  font-weight: 600;
+}

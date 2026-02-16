@@ -1,0 +1,38 @@
+// src/components/00-base/00-defaults/_01-variables.scss
+
+/*
+ * General Variables
+ * Note: colors should go into
+ * components/00-base/01-colors/_colors-vars.scss
+ * and breakpoint related vars into
+ * components/00-base/00-defaults/_02-breakpoints.scss
+*/
+
+// Fonts
+$font-body: georgia, times, 'Times New Roman', serif;
+$font-heading: 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif;
+
+// Spacing base
+$space: 1rem;
+
+// Spacing multiplicado
+$space-double: calc($space * 2);
+$space-triple: calc($space * 3);
+$space-quadruple: calc($space * 4);
+$space-quintuple: calc($space * 5);
+$space-sextuple: calc($space * 6);
+$space-septuple: calc($space * 7);
+
+// Spacing dividido
+$space-one-half: calc($space / 2);
+$space-one-third: calc($space / 3);
+$space-one-fourth: calc($space / 4);
+$space-one-fifth: calc($space / 5);
+$space-one-sixth: calc($space / 6);
+$space-one-seventh: calc($space / 7);
+$space-one-eighth: calc($space / 8);
+
+// Función helper para spacing
+@function space($multiplier) {
+  @return calc($space * $multiplier);
+}

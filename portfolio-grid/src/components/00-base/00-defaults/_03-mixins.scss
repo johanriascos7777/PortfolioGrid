@@ -1,0 +1,92 @@
+// src/components/00-base/00-defaults/_03-mixins.scss
+
+@use './01-variables' as vars;
+@use './02-breakpoints' as bp;
+
+/*
+ * General Mixins (put specific ones in component files where applicable)
+*/
+
+/// Mixin - Body Copy
+@mixin body-copy {
+  font-family: vars.$font-body;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/// Mixin - Clearfix
+@mixin clearfix {
+  &::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+/// Mixin - Wrapper
+@mixin wrapper(
+  $container-max-width: bp.$max-width,
+  $outer-container-break: bp.$small,
+  $v-margin: 0,
+  $v-padding: 0,
+  $h-padding: vars.$space,
+  $h-padding-large: $h-padding
+) {
+  max-width: #{$container-max-width};
+  width: 100%;
+  margin: #{$v-margin} auto;
+  padding: #{$v-padding} #{$h-padding};
+  
+  @include bp.small {
+    padding: #{$v-padding} #{$h-padding-large};
+  }
+  
+  @media (min-width: $container-max-width) {
+    padding-left: calc(
+      #{$h-padding-large} + calc(-50vw + calc(#{$container-max-width} / 2))
+    );
+    padding-right: calc(
+      #{$h-padding-large} + calc(-50vw + calc(#{$container-max-width} / 2))
+    );
+  }
+}
+
+/// Mixin - Standard Margin
+@mixin margin {
+  margin-bottom: 1em;
+}
+
+/// Mixin - No bottom margin
+@mixin no-bottom {
+  margin-bottom: 0;
+}
+
+/// Mixin - List reset
+@mixin list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/// Mixin - Break text (truncate)
+@mixin break-text($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  line-clamp: $lines; // ✅ Propiedad estándar
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  * {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    line-clamp: $lines; // ✅ Propiedad estándar
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+/// Mixin - Space stack page
+@mixin space-stack-page {
+  margin-bottom: vars.$space-double;
+}
